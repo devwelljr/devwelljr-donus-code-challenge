@@ -4,15 +4,25 @@
   "description": "Teste técnico da Digital Republic.",
   "main": "index.js",
   "scripts": {
-    "start": "pm2-runtime start index.js",
+    "start": "node index.js",
+    "start:dev": "pm2 start ecosystem.config.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Wellington Gregorio",
+  "author": "Wellington Eustaquio Gregorio Junior",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cpf-cnpj-validator": "^1.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.1",
     "pm2": "^5.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.1"
   }
 }
