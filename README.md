@@ -12,7 +12,7 @@
 
 ## Instalação
 
--Clone o repositório através da seguinte chave https: `https://github.com/tuliotrindade/facile-challenge.git`
+-Clone o repositório através da seguinte chave https: `https://github.com/devwelljr/devwelljr-donus-code-challenge.git`
 
 -Instale as dependências através do `npm install`.
 
