@@ -19,4 +19,3 @@
 -Para iniciar a aplicação rode o comando `npm start` em seu terminal.
 
 ## Endpoints
-https://www.npmjs.com/package/cpf-cnpj-validator

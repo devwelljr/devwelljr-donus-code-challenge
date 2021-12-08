@@ -1,11 +1,12 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const userService = require('../services/usersService');
+const { creatUser, login } = require('../services/usersService');
 
+/* Criação de um cliente */
 const create = async (req, res) => {
 	const { name, cpf } = req.body;
 
-	const newUser = await userService.creatUser(name, cpf);
+	const newUser = await creatUser(name, cpf);
 
 	if (newUser.err) {
 		return res.status(406).send(newUser.err);
@@ -14,10 +15,11 @@ const create = async (req, res) => {
 	return res.status(201).send(newUser);
 };
 
-const login = async (req, res) => {
+/* Login de um cliente */
+const Login = async (req, res) => {
 	const { cpf } = req.body;
 
-	const User = await userService.login(cpf);
+	const User = await login(cpf);
 
 	if (User.err) {
 		return res.status(406).send(User.err);
@@ -25,11 +27,11 @@ const login = async (req, res) => {
 
 	const { _id } = User;
 
+	/* Gera token JWT */
 	const payload = { _id, cpf };
-
 	const token = jwt.sign(payload, process.env.SECRET);
 
 	res.status(200).send(`Your token for authorization: ${ token }`);
 };
 
-module.exports = { create, login };
+module.exports = { create, Login };

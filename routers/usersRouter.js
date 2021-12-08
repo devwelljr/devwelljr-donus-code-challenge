@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { create, login } = require('../controllers/usersController');
+const { create, Login } = require('../controllers/usersController');
 
 const {
 	validationEmptyBody,
@@ -13,6 +13,6 @@ const router = express.Router();
 
 router.post('/', validationEmptyBody, validationCPF, create);
 
-router.post('/login', validationEmptyBody, validationCPF, login);
+router.post('/login', validationEmptyBody, validationCPF, Login);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/usersModel');
 
+/* Validação do JWT */
 module.exports = async (req, res, next) => {
 	const token = req.headers.authorization;
 
@@ -9,19 +10,15 @@ module.exports = async (req, res, next) => {
 	}
 
 	try {
-		const { cpf } = jwt.verify(token, process.env.SECRET);
+		const decoded = jwt.verify(token, process.env.SECRET);
 
-		const user = await userModel.findByCPF(cpf);
+		const user = await userModel.findByCPF(decoded.cpf);
 
 		if (!user) {
-			return res
-				.status(401)
-				.json({ message: 'jwt malformed' });
+			return res.status(401).json({ message: 'jwt malformed' });
 		}
 
-		const { _id } = user;
-
-		req.user = { _id };
+		req.user = decoded;
 
 		next();
 	} catch (err) {
