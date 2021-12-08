@@ -12,10 +12,14 @@
 
 ## Instalação
 
--Clone o repositório através da seguinte chave https: `https://github.com/tuliotrindade/facile-challenge.git`
+-Clone o repositório através da seguinte chave https: `https://github.com/devwelljr/devwelljr-donus-code-challenge.git`
 
 -Instale as dependências através do `npm install`.
 
 -Para iniciar a aplicação rode o comando `npm start` em seu terminal.
 
 ## Endpoints
+<<<<<<< HEAD
+=======
+https://www.npmjs.com/package/cpf-cnpj-validator
+>>>>>>> 80c130d6dbc64841979da52fe5da72d5176f3b19
