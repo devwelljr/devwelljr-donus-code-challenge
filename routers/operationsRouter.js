@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post('/deposit', jwtValidation, validationDeposit, Deposit);
 
-router.post('/transfer', jwtValidation, validationTransfer, Transfer);
+router.put('/transfer', jwtValidation, validationTransfer, Transfer);
 
 module.exports = router;

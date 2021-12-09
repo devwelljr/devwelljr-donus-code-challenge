@@ -69,6 +69,7 @@ const validationDeposit = async (req, res, next) => {
 
 /* Validação de tipo e tamanho do body */
 const validationTransfer = async (req, res, next) => {
+	const { user: { current } } = req;
 	const { value, beneficiary } = req.body;
 	const formatedCPF = cpf.format(beneficiary);
 
@@ -84,6 +85,12 @@ const validationTransfer = async (req, res, next) => {
 	const err = { err: { message: 'Beneficiary not exist' } };
 	if (!beneficiaryExists) {
 		return res.status(404).send(err);
+	}
+
+	/* Valida se existe dinheiro na conta pra fazer a transferência */
+	const erro = { err: { message: 'You dont have balance for the transfer' } };
+	if (current < value) {
+		return res.status(404).send(erro);
 	}
 
 	next();
