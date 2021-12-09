@@ -12,6 +12,10 @@ const depositSchema = Joi.object().keys({
 	value: Joi.number().min(1).max(2000).required(),
 	beneficiary: Joi.string().min(11).required(),
 });
+const transferSchema = Joi.object().keys({
+	value: Joi.number().min(1).required(),
+	beneficiary: Joi.string().min(11).required(),
+});
 const cpfSchema = Joi.document().cpf();
 
 /* Validação de tipo e tamanho do body*/
@@ -41,7 +45,30 @@ const validationCPF = async (req, res, next) => {
 	next();
 };
 
+/* Validação de tipo e tamanho do body e se o valor do deposito é menor que 2000 */
 const validationDeposit = async (req, res, next) => {
+	const { value, beneficiary } = req.body;
+	const formatedCPF = cpf.format(beneficiary);
+
+	const { error } = transferSchema.validate({ value, beneficiary });
+	if (error) {
+		return res.status(400).send({
+			message: error.message,
+		});
+	}
+
+	/* Valida se existe uma conta pra receber o depósito */
+	const beneficiaryExists = await findByCPF(formatedCPF);
+	const err = { err: { message: 'Beneficiary not exist' } };
+	if (!beneficiaryExists) {
+		return res.status(404).send(err);
+	}
+
+	next();
+};
+
+/* Validação de tipo e tamanho do body */
+const validationTransfer = async (req, res, next) => {
 	const { value, beneficiary } = req.body;
 	const formatedCPF = cpf.format(beneficiary);
 
@@ -52,13 +79,19 @@ const validationDeposit = async (req, res, next) => {
 		});
 	}
 
+	/* Valida se existe uma conta pra receber a transferência */
 	const beneficiaryExists = await findByCPF(formatedCPF);
-	const err = { err: { message: 'beneficiary not exist' } };
-	if(!beneficiaryExists) {
+	const err = { err: { message: 'Beneficiary not exist' } };
+	if (!beneficiaryExists) {
 		return res.status(404).send(err);
 	}
 
 	next();
 };
 
-module.exports = { validationEmptyBody, validationCPF, validationDeposit };
+module.exports = {
+	validationEmptyBody,
+	validationCPF,
+	validationDeposit,
+	validationTransfer,
+};

@@ -1,11 +1,15 @@
 const express = require('express');
 
-const { Deposit } = require('../controllers/operationsController');
+const { Deposit, Transfer } = require('../controllers/operationsController');
 
 const jwtValidation = require('../middlewares/jwtValidation');
 
+const { validationDeposit, validationTransfer } = require('../middlewares/bodyValidation');
+
 const router = express.Router();
 
-router.post('/deposit', jwtValidation, Deposit);
+router.post('/deposit', jwtValidation, validationDeposit, Deposit);
+
+router.post('/transfer', jwtValidation, validationTransfer, Transfer);
 
 module.exports = router;
