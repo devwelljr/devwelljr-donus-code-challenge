@@ -4,6 +4,8 @@
 
 Desafio Técnico para processo seletivo, este projeto consiste na implementação de um sistema de banco, onde o cliente pode criar conta com apenas seu nome completo e CPF, fazer login assim sendo autenticado, já autenticado o cliente poderá fazer depositos em contas validas em até R$2.000,00 e fazer transferências ilimitadas para outras contas.
 
+#### :link: [Desafio Repositório](https://github.com/devdigitalrepublic/donus-code-challenge/blob/master/backend.md)
+
 ## Tecnologias Utilizadas
 
 #### :link: [Node.js](https://nodejs.org/en/)
