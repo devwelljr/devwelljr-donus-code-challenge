@@ -10,6 +10,9 @@ Desafio Técnico para processo seletivo, este projeto consiste na implementaçã
 #### :link: [Express](https://expressjs.com/pt-br/)
 #### :link: [MongoDB](https://docs.mongodb.com/)
 #### :link: [JsonWebToken](https://jwt.io/introduction)
+#### :link: [Joi](https://joi.dev/api/?v=17.5.0)
+#### :link: [cpf-validator](https://github.com/carvalhoviniciusluiz/cpf-cnpj-validator#readme)
+
 
 ## Pré-Requisitos
 
