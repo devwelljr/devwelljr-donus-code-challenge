@@ -46,9 +46,21 @@ O token deve ser inserido no `header` no campo `Authorization` para fazer as ope
 
 ### POST: http://localhost:3000/operations/deposit
 
-Para fazer deposito é necessário inserir no `Body` o CPF do beneficiário no campo `beneficiary` e valor no campo `value` sendo maior que 1.
+Para fazer deposito é necessário inserir no `Body` o CPF do beneficiário no campo `beneficiary` e valor no campo `value` sendo maior que 1 e por questões de segurança menor do que R$2000.00.
 
 ![DemonstraçãoDeposito](/images/depositOp.png)
+
+### PUT: http://localhost:3000/operations/transfer
+
+Para fazer transferência é necessário inserir no `Body` o CPF do beneficiário no campo `beneficiary` e valor no campo `value` sendo maior que 1.
+
+![DemonstraçãoTransferencia](/images/transferOp.png)
+
+### GET: http://localhost:3000/operations/current
+
+Para olhar o saldo da conta é necessário apenas o token no `header` no campo `Authorization`.
+
+![DemonstraçãoTransferencia](/images/currentOp.png)
 
 ## Contato 
 
