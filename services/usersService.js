@@ -20,8 +20,9 @@ const creatUser = async (name, CPF) => {
 };
 
 /* Login de um cliente */
-const login = async (cpf) => {
-	const User = await findByCPF(cpf);
+const login = async (CPF) => {
+	const formatedCPF = cpf.format(CPF);
+	const User = await findByCPF(formatedCPF);
 
 	const err = { err: { message: 'user not exist' } };
 	if (!User) return err;

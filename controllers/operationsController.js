@@ -1,16 +1,17 @@
+const rescue = require('express-rescue');
 const { deposit, transfer } = require('../services/operationsService');
 
 /* Depósito de um cliente */
-const Deposit = async (req, res) => {
+const Deposit = rescue(async (req, res) => {
 	const { value, beneficiary } = req.body;
 
 	const newDeposit = await deposit(value, beneficiary);
 
 	return res.status(200).send(newDeposit);
-};
+});
 
 /* Transferência de um cliente */
-const Transfer = async (req, res) => {
+const Transfer = rescue(async (req, res) => {
 	const { user: { cpf, name } } = req;
 	const { value, beneficiary } = req.body;
 	const payer = { cpf, name };
@@ -18,6 +19,15 @@ const Transfer = async (req, res) => {
 	const newTransfer = await transfer(value, beneficiary, payer);
 
 	return res.status(200).send(newTransfer);
-};
+});
 
-module.exports = { Deposit, Transfer };
+/* Saldo de um cliente */
+const Current = rescue(async (req, res) => {
+	const { user: { current } } = req;
+
+	const currenT = `Seu saldo atual é de R$${current.toFixed(2)}.`;
+
+	return res.status(200).send(currenT);
+});
+
+module.exports = { Deposit, Transfer, Current };

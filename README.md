@@ -23,7 +23,29 @@ Este projeto Utiliza o banco de dados MongoDB, para o perfeito funcionamento é 
 
 -Para iniciar a aplicação rode o comando `npm start` em seu terminal.
 
-## Endpoints
+## Como utilizar
+
+### POST: http://localhost:3000/users
+
+O projeto começa com o cliente tendo que criar conta no `Donus Bank`, onde deve passar para o `Body` da requisição seu nome completo no campo `name` com no mínimo 4 caracteres e CPF brasileiro válido com formatação ou sem no campo `cpf`.
+
+![DemonstraçaoCriaçãoUser](/images/createUser.png)
+
+### POST: http://localhost:3000/users/login
+
+Após isto o cliente deverá efetuar o login, onde deve passar para o `Body` da requisição seu CPF, assim será verificado se o cliente existe no banco de dados e gerado um token JWT para o cliente fazer operações de transferência, deposito e saldo da conta.
+
+![DemonstraçãoLogin](/images/loginUser.png)
+
+O token deve ser inserido no `header` no campo `Authorization` para fazer as operações a seguir:
+
+![DemonstraçãoAutorização](/images/authorization.png)
+
+### POST: http://localhost:3000/operations/deposit
+
+Para fazer deposito é necessário inserir no `Body` o CPF do beneficiário no campo `beneficiary` e valor no campo `value` sendo maior que 1.
+
+![DemonstraçãoDeposito](/images/depositOp.png)
 
 ## Contato 
 

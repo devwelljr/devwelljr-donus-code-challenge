@@ -5,7 +5,7 @@ const { findByCPF } = require('../models/usersModel');
 
 /* Schemas para validação com Joi: https://www.npmjs.com/package/@hapi/joi */
 const bodySchema = Joi.object().keys({
-	name: Joi.string().min(3).required(),
+	name: Joi.string().min(4).required(),
 	cpf: Joi.string().min(11).required(),
 });
 const depositSchema = Joi.object().keys({
@@ -35,6 +35,10 @@ const validationEmptyBody = async (req, res, next) => {
 const validationCPF = async (req, res, next) => {
 	const { cpf } = req.body;
 	const { error } = cpfSchema.validate(cpf);
+
+	if (!cpf) {
+		return res.status(400).send({ message: 'Não foi passado o CPF' });
+	}
 
 	if (error) {
 		return res.status(400).send({
@@ -69,7 +73,9 @@ const validationDeposit = async (req, res, next) => {
 
 /* Validação de tipo e tamanho do body */
 const validationTransfer = async (req, res, next) => {
-	const { user: { current } } = req;
+	const {
+		user: { current },
+	} = req;
 	const { value, beneficiary } = req.body;
 	const formatedCPF = cpf.format(beneficiary);
 
